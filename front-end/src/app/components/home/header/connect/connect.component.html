@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="codeinfo.png" alt="Logo" class="img-fluid" id="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <div class="ms-auto d-flex flex-column flex-md-row gap-2" id="navbar-buttons">
+       <button type="button" class="btn btn-light position-relative me-2">
+        <img
+        [src]="url+user.photoUrl"
+        alt="Photo de "
+        class="rounded-circle img-fluid"
+        width="55"
+        height="50"
+      />
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
+          <span class="visually-hidden">New alerts</span>
+        </span>
+        </button>
+        <button class="btn btn-info text-white" (click)="logout()" id="deconnexion"> <mat-icon aria-hidden="false" aria-label="Example logout icon" fontIcon="logout"></mat-icon> </button>
+      </div>
+    </div>
+  </div>
+</nav>

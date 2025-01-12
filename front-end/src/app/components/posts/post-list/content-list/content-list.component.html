@@ -1,0 +1,24 @@
+ <!-- Liste des cartes -->
+ <div class="row justify-content-center">
+  <div class="col-md-4" *ngFor="let post of posts">
+    <div class="card mb-4">
+      <!-- Image de l'auteur -->
+      <div class="d-flex align-items-center">
+        <img
+          [src]="url+post.user.photoUrl"
+          alt="Photo de {{ post.user.username }}"
+          class="rounded-circle m-2"
+          width="50"
+          height="50"
+        />
+        <span class="fw-bold text-success">{{ post.user.username }}</span>
+      </div>
+      <!-- Contenu de la carte -->
+      <div class="card-body">
+        <h5 class="card-title text-wrap">{{ post.titre }}</h5>
+        <p class="card-text text-truncate" [innerHTML]="post.description"> </p>
+        <a [routerLink] ="['/post', post.id]" class="btn btn-outline-success btn-sm">Voir plus</a>
+      </div>
+    </div>
+  </div>
+</div>

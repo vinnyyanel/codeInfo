@@ -1,0 +1,62 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 bg-info-subtle text-info-emphasis">
+      <app-header/>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <!-- Détails du post -->
+    <div class="row">
+      <div *ngIf="isLoading; else elseBlock" style="height: 500px;">
+        <!-- Affichage des posts -->
+        <div class="text-center position-absolute top-50 start-50 translate-middle">
+          <div class="spinner-grow text-info" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Template pour le spinner de chargement -->
+      <ng-template #elseBlock>
+        <div class="col-12 text-info-emphasis">
+          <h3>{{ post.titre }}</h3>
+          <p [innerHTML]="post.description" ></p>
+
+          <!-- Affichage du créateur du post -->
+          <p><strong>Créé par:</strong> {{ post?.user?.username }} <span class="text-muted">le {{ post.created_at | date:'short' }}</span></p> <!-- Date du créateur -->
+          <!-- Affichage des commentaires -->
+          <h4>Réponses</h4>
+          <div *ngIf="isLoading2; else elseBlock" style="height: 500px;">
+            <!-- Affichage des posts -->
+            <div class="text-center position-absolute top-50 start-50 translate-middle">
+              <div class="spinner-grow text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #elseBlock>
+            <div *ngFor="let comment of comments" class="border-bottom py-2">
+              <div class="d-flex flex-wrap">
+                <!-- Nom de l'utilisateur -->
+                <strong class="me-2">{{ comment.user.username }}</strong>
+                <!-- Date du commentaire -->
+                <span class="text-muted me-2">le {{ comment.created_at | date: 'short' }}</span>
+                <!-- Contenu du commentaire -->
+                <span class="flex-grow-1" [innerHTML]="comment.comment"></span>
+              </div>
+            </div>
+          </ng-template>
+          <!-- Formulaire d'ajout de commentaire -->
+          <app-comment-add [post_id]="postId" (signal)="conv($event)" ></app-comment-add>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 bg-dark text-info-emphasis">
+      <app-footer/>
+    </div>
+  </div>
+</div>

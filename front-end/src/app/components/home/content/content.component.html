@@ -1,0 +1,43 @@
+<div class="row mt-3 text-bg-light p-3 m-3 border rounded fw-light">
+  <!-- Première colonne -->
+  <div class="col-12 col-sm-6 mb-3 mb-sm-0 rounded border-end">
+    <div class="card border border-0 bg-light text-primary-emphasis">
+      <div class="card-body">
+        <h5 class="card-title text-center">
+          <b>Bienvenue sur <b class="bg-info">code <b class="text-light">i</b>nfo</b></b>
+        </h5>
+        <p class="card-text text-start">Une communauté dédiée aux développeurs où chaque question trouve sa réponse. Partagez vos soucis, échangez des idées, obtenez des solutions et progressez rapidement dans vos projets.</p>
+        <div *ngIf="isLog; else elseBlock">
+          <app-post-add ></app-post-add>
+        </div>
+        <ng-template #elseBlock>
+          <p> Cliquez sur <button type="button" class="btn btn-link link-info"> S'inscrire</button> pour rejoindre la communauté ou faites défiler pour découvrir quelques posts.</p>
+          <a href="#" class="btn btn-outline-info btn-sm">s'inscrire</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- Deuxième colonne -->
+  <div class="col-12 col-sm-6 rounded">
+    <div class="card mb-3 border border-0 text-primary-emphasis" style="max-width: 100%; max-height: 100%;">
+      <div class="row g-0">
+        <div class="col-12 col-md-4">
+          <img src="symbole_code.jpg" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Rechercher poste</h5>
+            <p class="card-text">Inscrivez au moins un mot du titre</p>
+            <div class="input-group input-group-sm">
+              <input type="text" class="form-control" placeholder="Rechercher...">
+              <button class="btn btn-info text-white" type="button">
+                <mat-icon aria-hidden="false" aria-label="Example search icon" fontIcon="search"></mat-icon> <!-- Icône de recherche -->
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-post-list />

@@ -1,0 +1,57 @@
+/* Logo */
+#logo {
+  max-width: 200px;
+  height: auto;
+}
+
+/* Navbar buttons */
+#navbar-buttons {
+  gap: 1rem; /* Espacement entre les boutons */
+}
+
+/* Pour petits écrans */
+@media (max-width: 768px) {
+  /* Logo */
+  #logo {
+    max-width: 120px; /* Logo plus petit sur les petits écrans */
+  }
+
+  /* Espacement des boutons */
+  #navbar-buttons {
+    margin-top: 5%;
+    flex-direction: column; /* Disposition verticale des boutons */
+    justify-content: end;
+    align-items: flex-end;
+    gap: 0.5rem; /* Espacement plus petit sur petits écrans */
+  }
+
+  #deconnexion {
+    margin-right: 5%;
+  }
+
+  /* Ajustement des tailles de boutons */
+  .btn {
+    font-size: 10px; /* Réduire la taille des boutons */
+    padding: 8px 10px; /* Réduire la taille du padding des boutons */
+  }
+}
+
+/* Pour grands écrans */
+@media (min-width: 768px) {
+  /* Logo */
+  #logo {
+    max-width: 200px; /* Taille du logo sur grand écran */
+  }
+
+  /* Boutons horizontaux */
+  #navbar-buttons {
+    flex-direction: row; /* Disposition horizontale sur grand écran */
+    gap: 1rem; /* Espacement des boutons */
+  }
+
+  /* Ajustement des tailles des boutons */
+  .btn {
+    font-size: 16px; /* Taille normale des boutons sur grand écran */
+    padding: 10px 20px; /* Taille du padding des boutons sur grand écran */
+  }
+}

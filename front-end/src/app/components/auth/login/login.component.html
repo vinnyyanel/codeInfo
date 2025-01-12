@@ -1,0 +1,59 @@
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-body-tertiary">
+  <div class="w-100 border p-2 border-primary-subtle bg-primary-subtle text-primary-emphasis shadow-lg bg-body-primary mb-5 rounded" style="max-width: 600px;">
+    <h1 class="text-center mb-4">Bienvenue sur Code<span class="text-primary">i</span>nfo</h1>
+
+    <div class="form-group row mb-3 d-flex justify-content-center">
+      <div *ngIf="error" class="col-md-6">
+        <div class="alert alert-danger text-center" role="alert">
+            {{error}}
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="form" class="needs-validation " (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group row mb-3 d-flex justify-content-center">
+        <div class="col-md-6">
+          <label for="email">Email</label>
+          <input type="text" id="email" class="form-control" placeholder="exemple@gmail.com" formControlName="email" />
+          <ng-input-validation
+            [error]="form.get('email')?.errors"
+            [control]="form.get('email')"
+            [showError]="true"
+            [errorMessages]="customMessages"
+          ></ng-input-validation>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 d-flex justify-content-center">
+         <!-- Champ Password -->
+        <div class="col-md-6">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" class="form-control" placeholder="*****" formControlName="password" />
+          <ng-input-validation
+            [error]="form.get('password')?.errors"
+            [control]="form.get('password')"
+            [showError]="true"
+            [errorMessages]="customMessages"
+          ></ng-input-validation>
+        </div>
+      </div>
+      @if (isLoading) {
+        <!-- Bouton Submit -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" disabled>
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          Se connecter
+        </button>
+      </div>
+      }@else {
+      <!-- Bouton Submit -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Se connecter</button>
+      </div>
+    }
+    </form>
+    <div class="d-flex justify-content-around">
+      <p class="m-2 p-2 fw-bold text-star">Pas encore inscrit?<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover " routerLink="/register"> s'inscrire</a></p>
+      <p class="m-2 p-2 fw-bold text-end">Mot de passe oublier?<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover " href=""> Changer</a></p>
+    </div>
+  </div>
+</div>

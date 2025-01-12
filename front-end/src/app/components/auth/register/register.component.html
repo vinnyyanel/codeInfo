@@ -1,0 +1,91 @@
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-body-tertiary">
+  <div class="w-100 border p-2 border-primary-subtle bg-primary-subtle text-primary-emphasis shadow-lg bg-body-primary mb-5 rounded" style="max-width: 600px;">
+    <h1 class="text-center mb-4">Bienvenue sur Code<span class="text-primary">i</span>nfo</h1>
+    <form [formGroup]="form" class="needs-validation" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <div class="form-group row mb-3">
+        <!-- Champ Username -->
+        <div class="col-md-6">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" class="form-control" placeholder="entrer un nom d'utilisateur" formControlName="username" />
+          <ng-input-validation
+            [error]="form.get('username')?.errors"
+            [control]="form.get('username')"
+            [showError]="true"
+            [errorMessages]="customMessages"
+          ></ng-input-validation>
+        </div>
+
+        <!-- Champ Email -->
+        <div class="col-md-6">
+          <label for="email">Email</label>
+          <input type="text" id="email" placeholder="exemple@gmail.com" class="form-control" formControlName="email" />
+          <ng-input-validation
+            [error]="form.get('email')?.errors"
+            [control]="form.get('email')"
+            [showError]="true"
+            [errorMessages]="customMessages"
+          ></ng-input-validation>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3 d-flex justify-content-center">
+        <!-- Champ Photo -->
+        <div class="col-md-6 ">
+          <label for="photo">Photo</label>
+          <input type="file" id="photo" class="form-control" name="photo" (change)="onFileChange($event)"/>
+        </div>
+      </div>
+
+      <div class="form-group row mb-3">
+        <!-- Champ Confirm Password -->
+         <!-- Champ Password -->
+        <div class="col-md-6">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" placeholder="******" class="form-control" formControlName="password" />
+          <ng-input-validation
+            [error]="form.get('password')?.errors"
+            [control]="form.get('password')"
+            [showError]="true"
+            [errorMessages]="customMessages"
+          ></ng-input-validation>
+        </div>
+        <div class="col-md-6">
+          <label for="confirmPassword">Confirmation du mot de passe</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            placeholder="Confirmation du mot de passe"
+            formControlName="confirmPassword"
+          />
+          <ng-input-validation
+            [error]="form.get('confirmPassword')?.errors"
+            [control]="form.get('confirmPassword')"
+            [showError]="true"
+            [errorMessages]="customMessages"
+          ></ng-input-validation>
+          @if (passwordMatchValidator() == false) {
+            <p class="text-danger">les mots de passes ne correspondent pas</p>
+          }
+        </div>
+      </div>
+      @if (isLoading) {
+        <!-- Bouton Submit -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" disabled>
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          S'inscrire
+        </button>
+      </div>
+      }@else {
+      <!-- Bouton Submit -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">S'inscrire</button>
+      </div>
+    }
+    </form>
+    <div class="d-flex justify-content-between">
+      <p class="m-2 p-2 fw-bold text-star">Déja inscrit? <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" routerLink="/login">se connecter</a></p>
+    </div>
+  </div>
+</div>

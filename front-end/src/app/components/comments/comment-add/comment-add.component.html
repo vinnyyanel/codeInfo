@@ -1,0 +1,23 @@
+
+@if (authService.islogin()) {
+  <div class="mt-4">
+    <h5>Laisser un commentaire :</h5>
+      <editor
+       id="commentaire"
+      [(ngModel)]="comment"
+      name="comment"
+      [init]="config"
+      required>
+    </editor>
+    @if (isLoading) {
+      <button (click)="addComment()" class="btn btn-success text-white mb-2" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Ajouter un commentaire
+      </button>
+    }@else {
+      <button (click)="addComment()" class="btn btn-success text-white mb-2">Ajouter un commentaire</button>
+    }
+  </div>
+}@else {
+  <p><strong>connectez vous pour laisser un commentaire</strong></p>
+}

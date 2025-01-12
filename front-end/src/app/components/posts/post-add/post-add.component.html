@@ -1,0 +1,69 @@
+<p>
+  Cliquez sur <b class=" fw-bolder text-info ">publier</b> pour effectuer un post et recevoir des réponses.
+</p>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-info btn-sm " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  publier
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="form-group row mb-2 d-flex justify-content-center">
+            <div *ngIf="message" class="col-md-6">
+              <div class="alert alert-success text-center" role="alert">
+                  {{message}}
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <form>
+              <!-- Titre -->
+              <div class="mb-3">
+                <label for="postTitle" class="form-label">Titre du post</label>
+                <input
+                  type="text"
+                  id="postTitle"
+                  class="form-control"
+                  [(ngModel)]="titre"
+                  name="titre"
+                  placeholder="Entrez le titre du post"
+                  required>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="postDescription" class="form-label">Description</label>
+                <editor
+                id="postDescription"
+                [(ngModel)]="description"
+                name="description"
+                [init]="config"
+                required>
+                </editor>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+        @if (isLoading) {
+          <button (click)="onSubmit()" class="btn btn-info" disabled>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            Publier
+          </button>
+        }@else {
+        <button type="button" (click)="onSubmit()" class="btn btn-info">Publier</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
