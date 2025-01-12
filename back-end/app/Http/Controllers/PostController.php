@@ -10,11 +10,45 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all(['id', 'titre', 'description', 'user_id']);
+        $posts = Post::with('user')->paginate(4);
         if ($posts->isEmpty()) {
             return response()->json(['message' => 'Aucun post trouvé.'], 404);
         }
         return response()->json($posts, 200);
+    }
+
+    public function getPostUserCommentsUsers($id)
+    {
+        // Récupérer le post avec les commentaires et les utilisateurs des commentaires
+        $post = Post::with('comments.user')->findOrFail($id);
+
+        // Retourner la vue avec les données
+        return view('post.show', compact('post'));
+    }
+    public function getComments($postId)
+    {
+        // Récupérer les commentaires du post avec les utilisateurs associés
+        $comments = Post::findOrFail($postId)
+                        ->comments()
+                        ->with('user')  // Charger les utilisateurs des commentaires
+                        ->get();
+
+        // Retourner les commentaires au format JSON
+        return response()->json($comments);
+    }
+
+    public function getPostComments($id)
+    {
+        $post = Post::with('comments')->find($id);
+
+        if (!$post) {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+
+        return response()->json([
+            'post' => $post,
+            'comments' => $post->comments
+        ]);
     }
 
     /**
@@ -23,15 +57,15 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'titre' => 'required|string',
-            'description' => 'required|string',
-            'user_id' => 'required|exists:users,id',
+            'titre' => 'required',
+            'description' => 'required',
+            'user_id' => 'required',
         ]);
 
         try {
             $post = Post::create($validated);
             SendNewsletterJob::dispatch($post->titre);
-            return response()->json(['message' => 'Enregistrement réussi.'], 201);
+            return response()->json(['message' => 'Post publier!!!.'], 201);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Échec de l’enregistrement.', 'error' => $e->getMessage()], 500);
         }
@@ -42,7 +76,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::find($id);
+        $post = Post::with('user')->findOrFail($id);
         if (!$post) {
             return response()->json(['message' => 'Post introuvable.'], 404);
         }

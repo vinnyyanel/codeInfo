@@ -20,10 +20,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $vli = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'photo' => 'required|image', // Vérifie que c'est une image et limite la taille
+            'photo' => 'required', // Vérifie que c'est une image et limite la taille
             'username' => 'required'
         ]);
 
@@ -34,6 +34,7 @@ class UserController extends Controller
                 'public'
             );
 
+
             $photoUrl = Storage::url($chemin);
 
             User::create([
@@ -43,7 +44,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->password), // Hash du mot de passe
             ]);
 
-            return response()->json(['message' => 'Inscription réussie'], 201);
+            return response()->json(['message' => $vli], 201);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Erreur lors de l\'inscription', 'error' => $th->getMessage()], 500);
         }
