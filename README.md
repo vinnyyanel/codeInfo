@@ -89,5 +89,5 @@ Ajouter un fichier .env pour Laravel avec vos configurations MySQL.
 Les contributions sont les bienvenues !
 
 ## Contact
-Auteur : Vinny Yanel
+Auteur : Vinny Yanel, 
 Email : Assembeenghot@gmail.com
