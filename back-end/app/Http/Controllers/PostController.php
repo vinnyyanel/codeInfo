@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendNewsletterJob;
 use App\Models\Post;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -64,7 +65,8 @@ class PostController extends Controller
 
         try {
             $post = Post::create($validated);
-            SendNewsletterJob::dispatch($post->titre);
+            SendNewsletterJob::dispatch($post->titre,$post->id);
+            $tes=Subscriber::create(['email'=>'ired']);
             return response()->json(['message' => 'Post publier!!!.'], 201);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Échec de l’enregistrement.', 'error' => $e->getMessage()], 500);

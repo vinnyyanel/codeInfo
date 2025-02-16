@@ -14,10 +14,25 @@
       <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
         <h5 class="text-uppercase mb-4 font-weight-bold text-info">Newsletter</h5>
         <p>Recevez nos dernières nouvelles et mises à jour directement dans votre boîte email.</p>
-        <form>
+        <form onsubmit="register()">
           <div class="input-group">
-            <input type="email" class="form-control" placeholder="Entrez votre email" required>
-            <button type="submit" class="btn btn-info text-white">S'inscrire</button>
+            <input
+             type="email"
+             class="form-control"
+             placeholder="Entrez votre email"
+            [(ngModel)]="email"
+            required>
+            @if (isLoading) {
+              <!-- Bouton Submit -->
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-info text-white" disabled>
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                S'inscrire
+              </button>
+            </div>
+            }@else{
+              <button type="submit" class="btn btn-info text-white">S'inscrire</button>
+            }
           </div>
         </form>
       </div>
@@ -48,7 +63,7 @@
     <div class="row align-items-center">
       <div class="col-md-7 col-lg-8">
         <p class="text-center text-md-start">
-          © 2025 <b>Code Info</b>. Tous droits réservés.
+          © 2025 <b>Code <b class="text-info">I</b>nfo</b>. Tous droits réservés.
         </p>
       </div>
       <div class="col-md-5 col-lg-4">

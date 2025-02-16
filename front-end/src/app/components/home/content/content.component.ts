@@ -4,6 +4,7 @@ import { PostListComponent } from "../../posts/post-list/post-list.component";
 import { NgIf } from '@angular/common';
 import { PostAddComponent } from '../../posts/post-add/post-add.component';
 import { AuthService } from '../../../services/auth.service';
+import { SearchComponent } from '../../posts/search/search.component';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { AuthService } from '../../../services/auth.service';
   imports: [
     MatIconModule,
     PostListComponent,
-    NgIf,
+    SearchComponent,
     PostAddComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,9 +24,7 @@ export class ContentComponent {
   private authService = inject(AuthService);
   isLog = false;
   constructor(){
-   if (localStorage.getItem(this.authService.tokenKey)) {
-     this.isLog = true;
-   }
+     this.isLog = this.authService.islogin();
   }
 
 }

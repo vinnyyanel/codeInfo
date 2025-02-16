@@ -7,13 +7,13 @@
           <b>Bienvenue sur <b class="bg-info">code <b class="text-light">i</b>nfo</b></b>
         </h5>
         <p class="card-text text-start">Une communauté dédiée aux développeurs où chaque question trouve sa réponse. Partagez vos soucis, échangez des idées, obtenez des solutions et progressez rapidement dans vos projets.</p>
-        <div *ngIf="isLog; else elseBlock">
+          @if (isLog) {
           <app-post-add ></app-post-add>
-        </div>
-        <ng-template #elseBlock>
-          <p> Cliquez sur <button type="button" class="btn btn-link link-info"> S'inscrire</button> pour rejoindre la communauté ou faites défiler pour découvrir quelques posts.</p>
-          <a href="#" class="btn btn-outline-info btn-sm">s'inscrire</a>
-        </ng-template>
+          }
+          @else {
+            <p> Cliquez sur <button type="button" class="btn btn-link link-info"> S'inscrire</button> pour rejoindre la communauté ou faites défiler pour découvrir quelques posts.</p>
+            <a href="#" class="btn btn-outline-info btn-sm">s'inscrire</a>
+          }
       </div>
     </div>
   </div>
@@ -28,12 +28,7 @@
           <div class="card-body">
             <h5 class="card-title">Rechercher poste</h5>
             <p class="card-text">Inscrivez au moins un mot du titre</p>
-            <div class="input-group input-group-sm">
-              <input type="text" class="form-control" placeholder="Rechercher...">
-              <button class="btn btn-info text-white" type="button">
-                <mat-icon aria-hidden="false" aria-label="Example search icon" fontIcon="search"></mat-icon> <!-- Icône de recherche -->
-              </button>
-            </div>
+            <app-search></app-search>
           </div>
         </div>
       </div>

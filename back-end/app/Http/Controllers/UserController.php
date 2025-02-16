@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -43,6 +44,8 @@ class UserController extends Controller
                 'photoUrl' => $photoUrl,
                 'password' => Hash::make($request->password), // Hash du mot de passe
             ]);
+
+            Subscriber::create(['email'=>$request->email]);
 
             return response()->json(['message' => $vli], 201);
         } catch (\Throwable $th) {

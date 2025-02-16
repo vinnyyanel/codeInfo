@@ -19,11 +19,9 @@ export class HeaderComponent {
  isLog = false;
  user : any;
  constructor(){
-  if (localStorage.getItem(this.authService.tokenKey)) {
+  if (this.authService.islogin()) {
     this.isLog = true;
     this.user = this.authService.getUser();
-    console.log(this.user);
-    console.log("this.authService.getUser");
     console.log(this.user);
   }
  }

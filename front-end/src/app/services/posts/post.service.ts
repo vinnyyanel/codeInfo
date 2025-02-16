@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class PostService {
 
   private  apiUrl:string = `http://127.0.0.1:8000/api/posts`;
+  private  apiUrlSearch:string = `http://127.0.0.1:8000/api/search`;
   private tokenKey : string = "code_info_token";
 
   constructor(private http: HttpClient, private router:Router) { }
@@ -48,6 +49,10 @@ export class PostService {
       'Authorization': `Bearer ${localStorage.getItem(this.tokenKey)}`
     });
      return this.http.post<any>(this.apiUrl+`/`,post,{headers});
+  }
+
+  searchPost(query:any): Observable<any>{
+     return this.http.get<any>(this.apiUrlSearch+`/`+query);
   }
 
   getPostAndComment(page: number): Observable<any> {

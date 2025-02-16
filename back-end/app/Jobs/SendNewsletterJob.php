@@ -16,14 +16,15 @@ class SendNewsletterJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $content;
+    protected $id;
     /**
      * Create a new job instance.
      */
-    public function __construct($content)
+    public function __construct($content,$id)
     {
         $this->content = $content;
+        $this->id = $id;
     }
-
     /**
      * Execute the job.
      */
@@ -31,7 +32,7 @@ class SendNewsletterJob implements ShouldQueue
     {
         $subscribers = Subscriber::all();
         foreach ($subscribers as $subscriber) {
-            Mail::to($subscriber->email)->send(new NewsletterMail($this->content));
+            Mail::to($subscriber->email)->send(new NewsletterMail($this->content,$this->id));
         }
     }
 }

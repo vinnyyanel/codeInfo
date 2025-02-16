@@ -20,6 +20,8 @@ use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
 
 
+Route::get('et',[PostController::class, 'teste']);
+
 Route::prefix('subscribers')->group(function () {        // Récupérer tous les abonnés a la newlester
     Route::post('/', [SubscriberController::class, 'store']);        // Créer un nouveau abonné
    });
@@ -30,8 +32,8 @@ Route::prefix('posts')->group(function () {
     Route::get('/{id}/comments', [PostController::class, 'getComments']);
 });
 
-Route::prefix('search/{slug}')->group(function () {
-    Route::post('/', [SearchController::class, 'search']);            // Réchercher les posts
+Route::prefix('search')->group(function () {
+    Route::get('/{query}', [SearchController::class, 'search']);            // Réchercher les posts
    });
 
    Route::prefix('users')->group(function () {
@@ -45,6 +47,7 @@ Route::middleware('guest')->group(function () {
         Route::post('/forgot-password', [AuthController::class, 'sendResetLink']);
     });
 });
+
 
 Route::middleware('auth:sanctum')->group(function () {
   Route::prefix('auth')->group(function () {
@@ -62,6 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('posts')->group(function () {           // Récupérer tous les posts
         Route::post('/', [PostController::class, 'store']);           // Créer un nouveau post
                 // Récupérer un post spécifique
+                Route::get('/t',[PostController::class, 'teste']);
         Route::put('/{id}', [PostController::class, 'update']);       // Mettre à jour un post
         Route::delete('/{id}', [PostController::class, 'destroy']);   // Supprimer un post
       //  Route::get('/{id}/comments', [PostController::class, 'comments']); // Récupérer les commentaires d'un post

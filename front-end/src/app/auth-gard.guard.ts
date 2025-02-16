@@ -17,3 +17,17 @@ export const authGardGuard: CanActivateFn = (route, state) => {
     return false;
   }
 };
+
+export const simpleGuard: CanActivateFn = (route, state) => {
+  const authUser = inject(AuthService);
+
+  console.log("greddd");
+  if (authUser.islogin()){
+    console.log("greddd");
+    return true;
+  }
+  else{
+    console.log("greddd");
+    return false;
+  }
+};
